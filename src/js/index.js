@@ -17,10 +17,15 @@ window.onresize = upDateImg();
 
 const showConselho = () => {
     const divP = document.querySelector('div.text p');
+    const spanText = document.querySelector('div.container span');
 
     fetch("https://api.adviceslip.com/advice")
     .then(response => response.json())
-    .then(data => divP.innerHTML = data.slip.advice)
+    .then(data => {
+        const id = data.slip.id
+        spanText.innerHTML = `advice #${id}`
+        divP.innerHTML = data.slip.advice
+    })
     .catch((erro) => console.log(erro))
 
 };
