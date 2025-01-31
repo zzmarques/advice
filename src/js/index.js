@@ -18,18 +18,22 @@ window.onresize = upDateImg();
 const showConselho = () => {
     const divP = document.querySelector('div.text p');
     const spanText = document.querySelector('div.container span');
+
+    const showDisplay = (data) => {
+        const id = data.slip.id;
+        spanText.innerHTML = `advice #${id}`;
+        divP.innerHTML = data.slip.advice;
+    }
     
-    const buscarConselho = async () => {
+    (async () => {
 
         const response = await fetch("https://api.adviceslip.com/advice");
         const data = await response.json();
 
-        const id = data.slip.id
-        spanText.innerHTML = `advice #${id}`
-        divP.innerHTML = data.slip.advice
+        showDisplay(data)
     
-    }
-    buscarConselho();
+    })();
+    
 
 };
 
